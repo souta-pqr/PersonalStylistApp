@@ -11,6 +11,17 @@
         <h1>パーソナルスタイリストアプリ</h1>
         <form id="upload-form">
             <input type="file" id="image-upload" accept="image/*">
+            <select id="season">
+                <option value="spring">春</option>
+                <option value="summer">夏</option>
+                <option value="autumn">秋</option>
+                <option value="winter">冬</option>
+            </select>
+            <select id="occasion">
+                <option value="casual">カジュアル</option>
+                <option value="work">仕事</option>
+                <option value="party">パーティー</option>
+            </select>
             <button type="submit">分析する</button>
         </form>
         <div id="result" style="display: none;">
@@ -18,6 +29,7 @@
             <img id="uploaded-image" src="" alt="アップロードされた画像">
             <p>あなたのスタイル: <span id="style"></span></p>
             <p>おすすめ: <span id="recommendation"></span></p>
+            <p>検出されたアイテム: <span id="detected-items"></span></p>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

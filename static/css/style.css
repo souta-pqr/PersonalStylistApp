@@ -13,7 +13,7 @@ body {
     padding: 20px;
 }
 
-h1 {
+h1, h2 {
     color: #333;
     text-align: center;
 }
@@ -24,9 +24,10 @@ form {
     margin-bottom: 20px;
 }
 
-input[type="file"] {
+input[type="file"], select {
     display: block;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 button {
