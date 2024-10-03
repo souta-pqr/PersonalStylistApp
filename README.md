@@ -31,13 +31,21 @@
 ## セットアップ
 1. リポジトリをクローン
 
-```git clone https://github.com/souta-pqr/PersonalStylistApp.git```
-```cd PersonalStylistApp```
+```
+git clone https://github.com/souta-pqr/PersonalStylistApp.git
+```
+```
+cd PersonalStylistApp
+```
 
 2. 仮想環境の作成と有効化（Anacondaを使用する場合）
 
-```conda create -n vit python=3.10```
-```conda activate vit```
+```
+conda create -n vit python=3.10
+```
+```
+conda activate vit
+あ```
 
 3. 必要なライブラリのインストール
 
