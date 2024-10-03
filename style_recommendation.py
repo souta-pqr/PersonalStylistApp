@@ -1,6 +1,4 @@
-import datetime
-
-def get_personalized_recommendation(style, user_profile):
+def get_personalized_recommendation(style, detected_items, user_profile):
     base_recommendation = get_style_recommendation(style)
     
     if user_profile.body_type == 'plus_size':
@@ -8,6 +6,16 @@ def get_personalized_recommendation(style, user_profile):
     
     if 'casual' in user_profile.preferences:
         base_recommendation += " あなたの好みに合わせて、カジュアルな要素を取り入れるのもおすすめです。"
+    
+    # 検出されたアイテムに基づく推奨を追加
+    for item in detected_items:
+        base_recommendation += f" {item}に関しては、"
+        if item == 'person':
+            base_recommendation += "全体的なバランスを考慮しましょう。"
+        elif item in ['shirt', 'top']:
+            base_recommendation += "上半身のシルエットに注目してください。"
+        elif item in ['pants', 'skirt']:
+            base_recommendation += "下半身のラインを意識しましょう。"
     
     return base_recommendation
 
@@ -36,12 +44,3 @@ def adjust_recommendation_for_season_and_occasion(recommendation, season, occasi
     }
     
     return f"{recommendation} {season_adjustments[season]} {occasion_adjustments[occasion]}"
-
-def get_item_specific_recommendation(item):
-    item_recommendations = {
-        'shirt': "体型に合わせたフィット感のあるシャツを選びましょう。",
-        'pants': "ラインが美しいパンツを選び、全体のバランスを整えましょう。",
-        'dress': "場面に応じた適切な丈とシルエットのドレスを選びましょう。",
-        'jacket': "季節に合わせた素材と、全体の色調に合うジャケットを選びましょう。"
-    }
-    return item_recommendations.get(item, "このアイテムに合わせたコーディネートを考えてみましょう。")

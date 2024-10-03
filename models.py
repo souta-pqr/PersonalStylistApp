@@ -1,14 +1,13 @@
-from transformers import ViTFeatureExtractor, ViTForImageClassification
+from transformers import ViTImageProcessor, ViTForImageClassification
 import torch
 
 class StyleClassifier:
     def __init__(self):
-        # 事前学習済みのViTモデルを使用
         self.model_name = "google/vit-base-patch16-224"
-        self.feature_extractor = ViTFeatureExtractor.from_pretrained(self.model_name)
+        self.image_processor = ViTImageProcessor.from_pretrained(self.model_name)
         self.model = ViTForImageClassification.from_pretrained(self.model_name)
         
-        self.model.eval()  # 評価モードに設定
+        self.model.eval()
 
         # ImageNetクラスラベルをファッションスタイルにマッピング
         self.style_mapping = {
@@ -23,7 +22,7 @@ class StyleClassifier:
 
     def predict(self, image):
         with torch.no_grad():
-            inputs = self.feature_extractor(images=image, return_tensors="pt")
+            inputs = self.image_processor(images=image, return_tensors="pt")
             outputs = self.model(**inputs)
         
         logits = outputs.logits

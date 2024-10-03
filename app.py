@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 from models import StyleClassifier
-from utils import preprocess_image
-from user_profile import UserProfile
+from utils import preprocess_image, draw_bounding_boxes, create_overlay_image
 from image_recognition import ClothingItemDetector
 from style_recommendation import get_personalized_recommendation, adjust_recommendation_for_season_and_occasion
+from user_profile import UserProfile
 import os
 from werkzeug.utils import secure_filename
 
@@ -32,39 +32,41 @@ def analyze():
         return jsonify({'error': 'No selected file'})
     
     if file:
-        try:
-            filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            
-            image = preprocess_image(filepath)
-            style = model.predict(image)
-            detected_items = detector.detect_items(image)
-            
-            # ユーザープロファイルの取得（実際のアプリケーションではユーザー認証後に取得）
-            user_profile = UserProfile(age=30, gender='female', body_type='average', preferences=['casual', 'comfortable'])
-            
-            # 季節と場面の取得
-            season = request.form.get('season', 'spring')
-            occasion = request.form.get('occasion', 'casual')
-            
-            # パーソナライズされた推奨事項の生成
-            recommendation = get_personalized_recommendation(style, user_profile)
-            recommendation = adjust_recommendation_for_season_and_occasion(recommendation, season, occasion)
-            
-            # 検出されたアイテムごとの推奨事項を追加
-            for item in detected_items:
-                item_recommendation = detector.get_item_specific_recommendation(item)
-                recommendation += f"\n{item}について: {item_recommendation}"
-            
-            return jsonify({
-                'style': style,
-                'recommendation': recommendation,
-                'detected_items': detected_items,
-                'image_path': filepath
-            })
-        except Exception as e:
-            return jsonify({'error': f'File upload failed: {str(e)}'})
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        image = preprocess_image(filepath)
+        style = model.predict(image)
+        detections = detector.detect_items(image)
+        
+        # 検出結果を画像に描画
+        image_with_boxes = draw_bounding_boxes(image, detections)
+        result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'result_' + filename)
+        image_with_boxes.save(result_image_path)
+
+        # オーバーレイ画像の作成
+        overlay_image = create_overlay_image(image, detections)
+        overlay_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'overlay_' + filename)
+        overlay_image.save(overlay_image_path)
+        
+        season = request.form.get('season', 'spring')
+        occasion = request.form.get('occasion', 'casual')
+        
+        # ユーザープロファイルの作成（実際のアプリケーションではユーザー入力から取得）
+        user_profile = UserProfile(age=30, gender='female', body_type='average', preferences=['casual', 'comfortable'])
+        
+        recommendation = get_personalized_recommendation(style, [d['label'] for d in detections], user_profile)
+        recommendation = adjust_recommendation_for_season_and_occasion(recommendation, season, occasion)
+        
+        return jsonify({
+            'style': style,
+            'recommendation': recommendation,
+            'detected_items': [d['label'] for d in detections],
+            'original_image': filepath,
+            'result_image': result_image_path,
+            'overlay_image': overlay_image_path
+        })
 
 if __name__ == '__main__':
     app.run(debug=True)
