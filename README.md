@@ -30,7 +30,6 @@
 
 ## セットアップ
 1. リポジトリをクローン
-
 ```
 git clone https://github.com/souta-pqr/PersonalStylistApp.git
 ```
@@ -39,23 +38,24 @@ cd PersonalStylistApp
 ```
 
 2. 仮想環境の作成と有効化（Anacondaを使用する場合）
-
 ```
 conda create -n vit python=3.10
 ```
 ```
 conda activate vit
-あ```
+```
 
 3. 必要なライブラリのインストール
-
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 
 4. アプリケーションの実行
+```
+python app.py
+```
 
-```python app.py```
-
-5. ブラウザで `http://localhost:5000` にアクセスし、アプリケーションを使用開始
+5. ブラウザで **http://localhost:5000** にアクセスし、アプリケーションを使用開始
 
 ## 使用方法
 1. ホームページにアクセスし、「ファイルを選択」ボタンをクリックして分析したい服装や体型の画像を選択します
