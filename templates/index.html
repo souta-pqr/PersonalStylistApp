@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パーソナルスタイリストアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>パーソナルスタイリストアプリ</h1>
+        <form id="upload-form">
+            <input type="file" id="image-upload" accept="image/*">
+            <button type="submit">分析する</button>
+        </form>
+        <div id="result" style="display: none;">
+            <h2>分析結果</h2>
+            <img id="uploaded-image" src="" alt="アップロードされた画像">
+            <p>あなたのスタイル: <span id="style"></span></p>
+            <p>おすすめ: <span id="recommendation"></span></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
