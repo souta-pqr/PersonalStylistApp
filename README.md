@@ -1,11 +1,11 @@
 # AIファッションアドバイザー
 
 ## 概要
-このパーソナルスタイリストアプリは、ユーザーの服装や体型の画像を分析し、個別化されたファッション提案を行うWebアプリケーションです。具体的には、Vision Transformer (ViT) モデルを使用してスタイル分析を行い、DETR (DEtection TRansformer) モデルを用いて画像内のアイテムを検出します。
+ユーザーの服装や体型の画像を分析し、個別化されたファッション提案を行うWebアプリケーションです。具体的には、Vision Transformer (ViT) モデルを使用してスタイル分析を行い、DETR (DEtection TRansformer) モデルを用いて画像内のアイテムを検出します。
 
 ## 目的
 - Vision Transformer を用いて、ユーザーの個人的なスタイルと体型に合わせた服装提案を行う
-- DETR モデルによる画像内アイテムの検出に基づいた、詳細なコーディネート提案を提供する
+- DETR モデルによる画像内アイテムの検出に基づいた、コーディネート提案を提供する
 - 季節や場面に応じた適切なファッション推奨を生成する
 
 ## 主な機能
@@ -18,7 +18,7 @@
 
 ## 動作環境
 - Python 3.7以上
-- 必要なライブラリ（詳細は requirements.txt を参照）
+- 必要なライブラリ
   - Flask 2.0.1
   - PyTorch 1.9.0
   - torchvision 0.10.0
@@ -66,7 +66,7 @@ python app.py
 - 季節と場面に応じたコーディネートのヒント
 
 ## 技術詳細
-- スタイル分析：Google の Vision Transformer (ViT) モデルをファインチューニングして使用
+- スタイル分析：Google の Vision Transformer (ViT) モデルを使用
 - アイテム検出：Facebook の DETR (DEtection TRansformer) モデルを使用
 - バックエンド：Flask フレームワークを使用した Python Webアプリケーション
 - フロントエンド：HTML, CSS, JavaScript を使用した軽量な SPA (Single Page Application)
