@@ -16,6 +16,19 @@
 5. 季節・場面対応：選択された季節や場面（仕事、カジュアル、パーティーなど）に応じて、推奨内容を調整します
 6. 詳細なアイテム別推奨：検出された各アイテムに対して、具体的な着こなしや組み合わせのアドバイスを提供します
 
+## 使用モデル
+1. Vision Transformer (ViT)
+   - モデル: google/vit-base-patch16-224
+   - 提供: Google Research
+   - ライセンス: Apache License 2.0
+   - 用途: スタイル分類タスク
+
+2. DETR (DEtection TRansformer)
+   - モデル: facebook/detr-resnet-50
+   - 提供: Facebook Research
+   - ライセンス: Apache License 2.0
+   - 用途: 衣類アイテムの検出
+
 ## 動作環境
 - Python 3.9以上
 - 必要なライブラリ
@@ -75,4 +88,24 @@ python app.py
 - フロントエンド：HTML, CSS, JavaScript を使用した軽量な SPA (Single Page Application)
 
 ## 謝辞
-- このプロジェクトは、Google の Vision Transformer と Facebook の DETR モデルの研究成果を活用しています
+このプロジェクトは以下の研究成果を活用しています：
+
+1. Vision Transformer (ViT):
+   ```
+   @article{dosovitskiy2020image,
+     title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+     author={Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and  Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+     journal={ICLR},
+     year={2021}
+   }
+   ```
+
+2. DETR:
+   ```
+   @article{carion2020end,
+     title={End-to-End Object Detection with Transformers},
+     author={Carion, Nicolas and Massa, Francisco and Synnaeve, Gabriel and Usunier, Nicolas and Kirillov, Alexander and Zagoruyko, Sergey},
+     journal={ECCV},
+     year={2020}
+   }
+   ```
