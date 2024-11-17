@@ -17,15 +17,18 @@
 6. 詳細なアイテム別推奨：検出された各アイテムに対して、具体的な着こなしや組み合わせのアドバイスを提供します
 
 ## 動作環境
-- Python 3.7以上
+- Python 3.9以上
 - 必要なライブラリ
-  - Flask 2.0.1
-  - PyTorch 1.9.0
-  - torchvision 0.10.0
-  - transformers 4.11.3
-  - Pillow 8.3.1
-  - OpenCV-Python 4.5.3.56
-  - Werkzeug 2.0.1
+  - Flask >= 2.0.1
+  - PyTorch == 2.2.2
+  - torchvision >= 0.16.0
+  - transformers >= 4.35.0
+  - Pillow >= 9.0.0
+  - OpenCV-Python >= 4.8.0
+  - Werkzeug >= 2.0.1
+  - timm >= 0.9.0
+  - importlib-metadata < 5.0
+  - scipy >= 1.9.0
 
 ## セットアップ
 1. リポジトリをクローン

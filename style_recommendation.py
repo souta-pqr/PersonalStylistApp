@@ -2,45 +2,45 @@ def get_personalized_recommendation(style, detected_items, user_profile):
     base_recommendation = get_style_recommendation(style)
     
     if user_profile.body_type == 'plus_size':
-        base_recommendation += " プラスサイズの方に似合うゆったりとしたシルエットを選びましょう。"
+        base_recommendation += " ゆったりとしたシルエットで体型を美しく見せることができます。"
     
     if 'casual' in user_profile.preferences:
-        base_recommendation += " あなたの好みに合わせて、カジュアルな要素を取り入れるのもおすすめです。"
+        base_recommendation += " カジュアルテイストを取り入れることで、より親しみやすい印象に仕上がります。"
     
     # 検出されたアイテムに基づく推奨を追加
     for item in detected_items:
-        base_recommendation += f" {item}に関しては、"
+        base_recommendation += f" {item}については、"
         if item == 'person':
-            base_recommendation += "全体的なバランスを考慮しましょう。"
+            base_recommendation += "全身のバランスを整えることで、より洗練された印象になります。"
         elif item in ['shirt', 'top']:
-            base_recommendation += "上半身のシルエットに注目してください。"
+            base_recommendation += "上半身のシルエットを整えることで、スタイルアップが期待できます。"
         elif item in ['pants', 'skirt']:
-            base_recommendation += "下半身のラインを意識しましょう。"
+            base_recommendation += "下半身のラインを意識することで、全体的なバランスが良くなります。"
     
     return base_recommendation
 
 def get_style_recommendation(style):
     recommendations = {
-        'casual': "快適でリラックスしたカジュアルウェアを選びましょう。ジーンズとTシャツの組み合わせがおすすめです。",
-        'formal': "フォーマルな場面に適した洗練されたスタイルを。スーツやドレスシャツを考えてみてはいかがでしょうか。",
-        'sporty': "アクティブなライフスタイルに合わせて、機能的でスタイリッシュなスポーツウェアを。",
-        'bohemian': "自由奔放で芸術的な雰囲気を演出する、ゆったりとしたシルエットや民族調のプリントを取り入れてみましょう。",
-        'preppy': "クラシックでエレガントな雰囲気を。ポロシャツやチノパンなどのアイテムがおすすめです。"
+        'casual': "快適性を重視したカジュアルスタイルがおすすめです。デニムとTシャツの組み合わせで、こなれた雰囲気を演出できます。",
+        'formal': "品格のある装いで、正式な場面に相応しい印象に。スーツやドレスシャツで、洗練された雰囲気を演出しましょう。",
+        'sporty': "機能性とデザイン性を兼ね備えたスポーツウェアで、アクティブな印象を演出します。",
+        'bohemian': "ゆったりとしたシルエットやエスニックプリントで、自由な雰囲気を表現してみましょう。",
+        'preppy': "清潔感のあるアイテムで知的な印象に。ポロシャツやチノパンで、品のある着こなしを実現できます。"
     }
-    return recommendations.get(style, "スタイルに合わせたおすすめのファッションを探してみましょう。")
+    return recommendations.get(style, "あなたの個性を活かしたスタイリングをご提案いたします。")
 
 def adjust_recommendation_for_season_and_occasion(recommendation, season, occasion):
     season_adjustments = {
-        'spring': "軽めのアウターやパステルカラーを取り入れると季節感が出ます。",
-        'summer': "涼しげな素材や明るい色使いで夏らしさを演出しましょう。",
-        'autumn': "レイヤードスタイルや温かみのある色調がおすすめです。",
-        'winter': "厚手のアウターや暖かい素材を選びましょう。"
+        'spring': "春らしい軽やかな装いには、薄手のアウターやパステルカラーがおすすめです。",
+        'summer': "夏の爽やかさを演出する涼しげな素材選びと、明るい色使いを心がけましょう。",
+        'autumn': "秋の装いには、重ね着とあたたかみのある色使いがぴったりです。",
+        'winter': "冬は保温性の高い素材を選び、暖かさと洗練さを両立させましょう。"
     }
     
     occasion_adjustments = {
-        'work': "きちんと感のあるアイテムを選び、清潔感を意識しましょう。",
-        'party': "アクセサリーやドレスアップアイテムでフォーマル感を出しましょう。",
-        'casual': "快適さを重視しつつ、トレンドアイテムを取り入れるのもおすすめです。"
+        'work': "ビジネスシーンに相応しい、清潔感とプロフェッショナルな印象を大切にしましょう。",
+        'party': "パーティーシーンでは、アクセサリーや華やかなアイテムで特別感を演出します。",
+        'casual': "快適さを重視しながら、トレンド要素を取り入れることで、おしゃれ度がアップします。"
     }
     
     return f"{recommendation} {season_adjustments[season]} {occasion_adjustments[occasion]}"
