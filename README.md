@@ -100,7 +100,7 @@ python app.py
    }
    ```
 
-2. DETR:
+2.  Detection Transformer (DETR):
    ```
    @article{carion2020end,
      title={End-to-End Object Detection with Transformers},
